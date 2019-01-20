@@ -1,19 +1,17 @@
-package com.technicalrj.cbclass2permission;
+package com.technicalrj.cbclass4recyclerview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ListDemo extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayList<Student> list;
@@ -21,7 +19,7 @@ public class ListDemo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_demo);
+        setContentView(R.layout.activity_main);
 
 
         listView = findViewById(R.id.listview);
