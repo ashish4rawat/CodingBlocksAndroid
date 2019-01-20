@@ -2,6 +2,7 @@ package com.technicalrj.cbclass4recyclerview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,26 +26,10 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
 
         list = new ArrayList<>();
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
-        list.add(new Student("Ashish","Programming"));
-        list.add(new Student("Atul","Playing"));
+        for (int i = 0; i < 20; i++) {
+            list.add(new Student("Ashish","Programming"));
+            list.add(new Student("Atul","Playing"));
+        }
 
 
         CustomAdaper customAdaper = new CustomAdaper();
@@ -71,19 +56,40 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View convertView, ViewGroup viewGroup) {
+
+            Log.d("InfoText", "position: "+i+"   getView: "+convertView);
 
             LayoutInflater layoutInflater = getLayoutInflater();
-            view = layoutInflater.inflate(R.layout.single_item,viewGroup,false);
+            ViewHolder viewHolder;
 
-            TextView tv = view.findViewById(R.id.name);
-            TextView tv_hobby = view.findViewById(R.id.hobby);
-
-            tv.setText(list.get(i).name);
-            tv_hobby.setText(list.get(i).hobby);
+            if(convertView==null){
+                convertView = layoutInflater.inflate(R.layout.single_item,viewGroup,false);
 
 
-            return view;
+                viewHolder = new ViewHolder(convertView);
+                convertView.setTag(viewHolder);
+            }else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+
+            viewHolder.name.setText(list.get(i).name);
+            viewHolder.hobby.setText(list.get(i).hobby);
+
+
+            return convertView;
+        }
+
+
+        class ViewHolder{
+
+            TextView name,hobby;
+
+            public ViewHolder( View convertView) {
+                name = convertView.findViewById(R.id.name);
+                hobby = convertView.findViewById(R.id.hobby);
+            }
         }
     }
 
