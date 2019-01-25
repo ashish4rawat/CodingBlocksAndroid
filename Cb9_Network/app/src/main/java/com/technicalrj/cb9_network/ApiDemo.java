@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,8 +31,49 @@ public class ApiDemo extends AppCompatActivity {
 
 
 
-        MyTask myTask = new MyTask();
-        myTask.execute("https://api.github.com/search/users?q=ashish4ra");
+/*        MyTask myTask = new MyTask();
+        myTask.execute("https://api.github.com/search/users?q=ashish4ra");*/
+
+        getData("https://api.github.com/search/users?q=ashish");
+
+    }
+
+
+    public void getData(String url) {
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call,  Response response) throws IOException {
+
+
+                String str = response.body().string();
+
+                final ArrayList<GithubUser> users = parseJson(str);
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(ApiDemo.this));
+
+                        GithubAdapter adapter = new GithubAdapter(users);
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
+
+            }
+        });
 
     }
 
@@ -66,8 +108,8 @@ public class ApiDemo extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
             showData(s);
+
         }
     }
 
