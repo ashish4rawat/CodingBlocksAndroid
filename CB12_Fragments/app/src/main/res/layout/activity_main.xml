@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +8,24 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+    <Button android:layout_width="wrap_content"
+            android:id="@+id/addButton"
+            android:text="Add Up"
+            android:layout_height="wrap_content"/>
 
+    <Button android:layout_width="wrap_content"
+            android:id="@+id/subButton"
+            android:layout_gravity="right"
+            android:text="Add Up"
+            android:layout_height="wrap_content"/>
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:id="@+id/fragContainer"
+                 android:layout_marginTop="50dp"
+                 android:layout_height="match_parent">
+    </FrameLayout>
+
+<!--
     <fragment android:layout_width="match_parent"
               android:id="@+id/addup"
               android:layout_weight="1"
@@ -22,6 +39,6 @@
               android:id="@+id/adddown"
               class="com.technicalrj.cb12_fragments.AddDown"
               tools:layout="@layout/fragment_add_down"
-              android:layout_height="0dp"/>
+              android:layout_height="0dp"/>-->
 
-</LinearLayout>
+</FrameLayout>
