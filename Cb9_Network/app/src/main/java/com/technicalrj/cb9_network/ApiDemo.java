@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import com.google.gson.Gson;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +35,7 @@ public class ApiDemo extends AppCompatActivity {
 /*        MyTask myTask = new MyTask();
         myTask.execute("https://api.github.com/search/users?q=ashish4ra");*/
 
-        getData("https://api.github.com/search/users?q=ashish");
+        getData("https://api.github.com/search/users?q=ashish4r");
 
     }
 
@@ -134,9 +135,12 @@ public class ApiDemo extends AppCompatActivity {
 
     private ArrayList<GithubUser> parseJson(String s) {
 
-        ArrayList<GithubUser> list = new ArrayList<>();
+        Gson gson = new Gson();
+        SingleResponse singleResponse = gson.fromJson(s,SingleResponse.class);
 
-        try {
+        ArrayList<GithubUser> list = singleResponse.getItems();
+
+/*        try {
             JSONObject jsonObject = new JSONObject(s);
             JSONArray jsonArray = jsonObject.getJSONArray("items");
 
@@ -151,9 +155,11 @@ public class ApiDemo extends AppCompatActivity {
 
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
         return list;
     }
+
+
 }

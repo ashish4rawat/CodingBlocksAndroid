@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.single_item.view.*
 
 class GithubAdapter(val list: ArrayList<GithubUser>) : RecyclerView.Adapter<GithubAdapter.GithubViewHolder>() {
@@ -35,6 +36,10 @@ class GithubAdapter(val list: ArrayList<GithubUser>) : RecyclerView.Adapter<Gith
             itemView.login.text = gihubUser.login
             itemView.html_url.text = gihubUser.html_url
             itemView.score.text = gihubUser.score.toString()
+            Picasso.get()
+                .load(gihubUser.avatar_url)
+                .into(itemView.imageView)
+
         }
 
     }
